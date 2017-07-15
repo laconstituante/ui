@@ -1,0 +1,37 @@
+<div *ngIf="!constitutions; then primaryBlock; else secondaryBlock"></div>
+<ng-template #primaryBlock>
+    <div>
+        <md-progress-bar mode="indeterminate"></md-progress-bar>
+    </div>
+</ng-template>
+<ng-template #secondaryBlock>
+    <div id="titre-home-page" class="home-page-header">
+        <h1 class="capitalize">
+            République française
+            </h1>
+        <table style="display: inline">
+            <tbody>
+            <tr style="height:5px">
+                <td style="background:blue;width: 160px;" title="liberté"></td>
+                <td style="background:white;width: 160px;" title="égalité"></td>
+                <td style="background:red;width: 160px;" title="fraternité"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <md-grid-list cols="1" rowHeight="800" >
+        <md-grid-tile >
+            <md-card class="home-page-card">       
+                <md-card-content class="home-page-card-content">            
+                    <md-list>
+                        <md-list-item *ngFor="let cons of constitutions">
+                            <a style="margin-bottom:10px" md-raised-button [routerLink]="['/constitution',cons.constitution_url]" >
+                                <h2>{{cons.constitution_name}}</h2>
+                            </a>
+                        </md-list-item>
+                    </md-list>
+                </md-card-content>                
+            </md-card>
+        </md-grid-tile>
+    </md-grid-list>
+</ng-template>

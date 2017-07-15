@@ -1,0 +1,7 @@
+<div style="text-align:center">
+    <h2>Vous n'avez pas encore fini de voter pour l'actuelle constitution</h2>
+    <h3>Afin de participer à la rédaction de la nouvelle constitution, veuillez s'il vous plait voter pour l'ensemble des textes de l'actuelle contitution.</h3>
+    <h4>vous êtes à {{ratio}}%</h4>
+    <p-chart *ngIf="pieData" height="150" type="pie" [data]="pieData"></p-chart>
+    <button md-raised-button style="margin-top:30px;"  (click)="vote()">Poursuivre mes votes</button>
+</div>

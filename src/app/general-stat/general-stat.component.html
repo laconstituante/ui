@@ -1,0 +1,32 @@
+<md-grid-list cols="3" >
+  <md-grid-tile >
+      <md-card class="card-pie">       
+          <md-card-content>            
+              <p-chart #chart type="pie" [data]="personnalPie" (onDataSelect)="update($event)"></p-chart>
+          </md-card-content>
+          <md-card-footer class="card-footer-pie-legend"> 
+              <h3>Nombre de votes tous alineas confondus</h3>         
+          </md-card-footer>
+      </md-card>
+  </md-grid-tile>
+  <md-grid-tile >
+      <md-card class="card-pie">      
+          <md-card-content>              
+              <p-chart  type="pie" [data]="personnalPie"></p-chart>
+          </md-card-content>
+          <md-card-footer class="card-footer-pie-legend"> 
+              <h3>Votre pourcentage d'acceptation</h3>         
+          </md-card-footer>
+      </md-card>
+  </md-grid-tile>
+  <md-grid-tile >
+      <md-card class="card-pie">       
+          <md-card-content>            
+              <p-chart type="pie" [data]="personnalPie"></p-chart>
+          </md-card-content>
+          <md-card-footer class="card-footer-pie-legend"> 
+              <h3>nombre d'articles acceptes/rejetes</h3>         
+          </md-card-footer>
+      </md-card>
+  </md-grid-tile>
+</md-grid-list>

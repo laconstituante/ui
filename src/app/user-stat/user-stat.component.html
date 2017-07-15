@@ -1,0 +1,88 @@
+<md-grid-list cols="3" rowHeight="650">
+  <md-grid-tile >
+      <md-card class="card-pie">
+          <md-card-header>
+              <h2>Statistiques de vos votes</h2>
+          </md-card-header>       
+          <md-card-content>            
+              <p-chart type="pie" [data]="charObject" (onDataSelect)="onChartClick($event)"></p-chart>
+          </md-card-content>
+          <md-card-footer class="card-footer-pie-legend"> 
+            <p>Ce graphique vous montre la répartitions de vos votes tout articles confondus.</p>           
+          </md-card-footer>
+      </md-card>
+  </md-grid-tile>
+  <md-grid-tile >
+      <md-card class="card-pie"> 
+          <md-card-header>
+              <h2>Statistiques de vos votes par titres</h2>
+          </md-card-header>     
+          <md-card-content>
+              <div *ngIf="ready && firstObject.votes > 0;then firstGraphAvailable else firstGraphNotAvailable"></div>
+             <ng-template #firstGraphAvailable >
+                    <p-chart type="bar" [data]="firstSet"></p-chart>
+                    <h2>{{firstObject.count}} titres</h2>
+                    <h2>{{firstObject.votes}} votes</h2>
+                    <h2>{{firstObject.total -firstObject.votes}} restant à voter</h2>
+             </ng-template>
+             <ng-template #firstGraphNotAvailable >
+                <div class="graph-placeholder">
+                    <div class="graph-placeholder-bar b1"></div>
+                    <div class="graph-placeholder-bar b2"></div>
+                    <div class="graph-placeholder-bar b3"></div>
+                    <div class="graph-placeholder-bar b4"></div>
+                    <div class="graph-placeholder-bar b5"></div>
+                    <div class="graph-placeholder-bar b6"></div>                    
+                </div>
+             </ng-template>
+          </md-card-content>
+          <md-card-footer class="card-footer-pie-legend"> 
+            <div *ngIf="firstObject.votes > 0;then firstpAvailable else firstpNotAvailable"></div>
+            <ng-template #firstpAvailable ><p>Ce graphique vous montre les taux de complétion de chaque titre.</p> </ng-template>
+            <ng-template #firstpNotAvailable ><p>Vous n'avez pas encore voté pour les titres 1 a 8...</p></ng-template>
+          </md-card-footer>
+      </md-card>
+</md-grid-tile>
+  <md-grid-tile >
+      <md-card class="card-pie">
+          <md-card-header>
+              <h2>Statistiques de vos votes par titres</h2>
+          </md-card-header>      
+          <md-card-content>
+            <div *ngIf="ready && secondObject.votes > 0;then secondGraphAvailable else secondGraphNotAvailable"></div>
+             <ng-template #secondGraphAvailable >
+                    <p-chart type="bar" [data]="secondSet"></p-chart>
+                    <h2>{{secondObject.count}} titres</h2>
+                    <h2>{{secondObject.votes}} votes</h2>
+                    <h2>{{secondObject.total - secondObject.votes}} restant à voter</h2>
+             </ng-template>
+             <ng-template #secondGraphNotAvailable >
+                <div class="graph-placeholder">
+                    <div class="graph-placeholder-bar b1"></div>
+                    <div class="graph-placeholder-bar b2"></div>
+                    <div class="graph-placeholder-bar b3"></div>
+                    <div class="graph-placeholder-bar b4"></div>
+                    <div class="graph-placeholder-bar b5"></div>
+                    <div class="graph-placeholder-bar b6"></div>  
+                </div>
+             </ng-template>
+            
+          </md-card-content>
+          <md-card-footer class="card-footer-pie-legend"> 
+            <div *ngIf="secondObject.votes > 0;then secondpAvailable else secondpNotAvailable"></div>
+            <ng-template #secondpAvailable ><p>Ce graphique vous montre les taux de complétion de chaque titre.</p> </ng-template>
+            <ng-template #secondpNotAvailable ><p>Vous n'avez pas encore voté pour les titres 8 a 16...</p></ng-template>
+          </md-card-footer>        
+      </md-card>
+    </md-grid-tile>
+</md-grid-list>
+<div class="arrow-scroll">
+  <!--<button md-raised-button (click)="goToNextVotes()" routerLink="{{b.action}}">
+    {{voteText}}
+  </button>-->
+  <a [routerLink]="['/poursuivre-mes-votes']" >
+    <button md-raised-button>
+        {{voteText}}
+    </button>
+  </a>
+</div>

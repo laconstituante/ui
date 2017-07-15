@@ -1,0 +1,42 @@
+<md-card *ngIf="alinea">                   
+    <md-card-title>Alinéa {{alinea.alinea_number}}
+        <span *ngIf="pieData" style="float:right">
+            <p-chart height="100" type="pie" [data]="pieData"></p-chart>
+        </span>
+    </md-card-title>
+    <md-card-content>
+        <md-tab-group (selectChange)="selectChange($event)">
+            <md-tab label="En vigueur">
+                {{alinea.alinea_text}}
+            </md-tab>
+            <md-tab label="Soumettre une proposition">
+                <md-input-container class="full-width">
+                <textarea maxlength="700" [(ngModel)]="proposition_txt" mdInput placeholder="Rédigez ici une nouvelle proposition pour cet alinea à soumettre au vote"></textarea>                
+                </md-input-container>
+            </md-tab>
+        </md-tab-group>
+    </md-card-content>
+    <md-card-actions>
+        <div [hidden]="selectedTab !== 0">
+            <!--<span class="contre-label">{{alinea.novotes_count?alinea.novotes_count:0}} contre</span>-->
+            <button md-raised-button [disabled]="alinea.vote === 0" (click)="vote(0)">Rejeter</button>
+            <button md-raised-button [disabled]="alinea.vote === 1" (click)="vote(1)" >Approuver</button>
+            <button md-raised-button [disabled]="alinea.vote === 2" (click)="vote(2)" >Sans opinion</button>
+            <!--<span class="pour-label">{{alinea.yesvotes_count?alinea.yesvotes_count:0}} pour</span>-->
+        </div>
+        <div [hidden]="selectedTab !== 1">
+            <button md-raised-button (click)="soumettreProposition()">Soumettre</button>
+        </div>
+    </md-card-actions>
+    <md-card-footer>
+        <div *ngIf="!propositions || propositions.length === 0" class="footer-no-prop">
+            Aucune nouvelle proposition n'a été soumise pour cet alinéa
+        </div>
+        <div *ngIf="propositions && propositions.length" class="footer-with-prop">
+            <md-chip-list>
+                <md-chip (click)="voirPropositions()"> {{propositions.length}} proposition(s) soumise(s) au vote</md-chip>
+                <md-chip (click)="voirCommentaires()"> 0 Commentaires</md-chip>
+            </md-chip-list>
+        </div>
+    </md-card-footer>
+</md-card>

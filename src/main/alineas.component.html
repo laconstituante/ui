@@ -1,0 +1,40 @@
+<div *ngIf="!alineas; then primaryBlock; else secondaryBlock"></div>
+<ng-template #primaryBlock>
+    <div>
+        <md-progress-bar mode="indeterminate"></md-progress-bar>
+    </div>
+</ng-template>
+<ng-template #secondaryBlock>
+    <div id="alineas-home-page" class="home-page-header">
+        <h1 class="capitalize">{{article_name}}</h1>
+        <h2></h2>
+        <table style="display: inline">
+            <tbody>
+            <tr style="height:5px">
+                <td style="background:blue;width: 160px;" title="liberté"></td>
+                <td style="background:white;width: 160px;" title="égalité"></td>
+                <td style="background:red;width: 160px;" title="fraternité"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="alineas" class="alineas-list-seo">
+        <div class="center_middle" *ngFor="let alinea of alineas">
+            <single-alinea class="article-text" [alinea]="alinea" ></single-alinea>
+        </div>
+    </div>    
+    <div class="alineas-list-seo" style="padding-bottom: 40px">
+        <div class="center_middle">
+        <md-card >                   
+            <md-card-title>Partager cet article sur:</md-card-title>
+            <md-card-content>
+                <button md-raised-button [sharer]="'facebook'" [caption]="article_name + ' de la constitution française'" [customUrl]="repoUrl" ><fa [name]="'facebook'" [border]=false></fa>Facebook</button>
+                <button md-raised-button [sharer]="'googlePlus'" [caption]="article_name + ' de la constitution française'" [customUrl]="repoUrl" ><fa [name]="'google-plus'" [border]=false></fa>Google Plus</button>
+                <button *ngIf="shortUrl" md-raised-button [sharer]="'twitter'" [caption]="'Que pensez-vous de l`' + article_name + ' de la constitution française?'" [customUrl]="shortUrl" ><fa [name]="'twitter'" [border]=false></fa>Twitter</button>
+                <button md-raised-button [sharer]="'linkedIn'" [caption]="article_name + ' de la constitution française'" [customUrl]="repoUrl" ><fa [name]="'linkedin'" [border]=false></fa>LinkedIn</button>
+                <button md-raised-button [sharer]="'pinterest'" [caption]="article_name + ' de la constitution française'" [customUrl]="repoUrl" ><fa [name]="'pinterest'" [border]=false></fa>Pinterest</button>
+            </md-card-content>
+        </md-card>
+        </div>
+    </div>
+</ng-template>

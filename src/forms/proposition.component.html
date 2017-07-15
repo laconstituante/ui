@@ -1,0 +1,16 @@
+<md-card class="proposition-card">
+  <md-card-header>    
+    <md-card-title>Proposition {{proposition.proposition_number}}</md-card-title>
+    <!--<md-card-subtitle>soumise le 12/05/2017</md-card-subtitle>-->
+  </md-card-header>  
+  <md-card-content>
+    <p>
+     {{proposition.proposition_text}}
+    </p>
+  </md-card-content>
+  <md-card-actions style="text-align: center">
+    <button md-raised-button [disabled]="proposition.vote === 3" (click)="signaler()">Signaler ({{proposition.reported_count}})</button>
+    <button md-raised-button [disabled]="proposition.vote === 0" (click)="rejeter()">Rejeter ({{proposition.novotes_count}})</button>
+    <button md-raised-button [disabled]="proposition.vote === 1" (click)="approuver()">Approuver ({{proposition.yesvotes_count}})</button>
+  </md-card-actions>
+</md-card>

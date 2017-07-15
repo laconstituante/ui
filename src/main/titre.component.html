@@ -1,0 +1,19 @@
+<div *ngIf="titre" class="titre-item">
+
+    <!--<h2 md-subheader (click)="displayRelatedArticles(titre.article_id)" mdTooltip="{{titre.toolTip}}">
+        <span class="titre-blod">{{item[0]}}</span>
+        <span class="titre-light">{{item[1]}}</span>
+    </h2>
+    <articles-compnent [articles]="titre.articles" 
+                        (onArticleSelected)="onArticleSelected($event)">
+    </articles-compnent>-->
+    <p-accordion mdTooltip="{{titre.toolTip}}">
+        <p-accordionTab  header="{{item[0]}}: {{item[1]}} ">
+            <articles-compnent [articles]="titre.articles" 
+                               [maindisplaying]="maindisplaying"
+                               [constitution_url]="constitution_url"
+                        (onArticleSelected)="onArticleSelected($event)">
+            </articles-compnent>
+        </p-accordionTab>        
+    </p-accordion>
+</div>

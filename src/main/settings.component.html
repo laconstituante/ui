@@ -1,0 +1,26 @@
+<div id="titre-home-page" class="home-page-header">
+    La constituante<br>
+    <table style="display: inline">
+        <tbody>
+        <tr style="height:5px">
+            <td style="background:blue;width: 160px;" title="liberté"></td>
+            <td style="background:white;width: 160px;" title="égalité"></td>
+            <td style="background:red;width: 160px;" title="fraternité"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<md-grid-list cols="1" rowHeight="{{customHeight}}" >
+  <md-grid-tile>
+    <md-card class="home-page-card">       
+        <md-card-content class="home-page-card-content">            
+            <login-component *ngIf="display === '/sidentifier'"></login-component>
+            <create-profile  *ngIf="display === '/creer-un-compte'"></create-profile>
+            <help-component  *ngIf="display === '/comment-ca-marche'"></help-component>
+            <contact-component  *ngIf="display === '/contactez-nous'"></contact-component>
+            <support-component *ngIf="display === '/participez-avec-nous'" ></support-component>
+            <user-propositions-component *ngIf="display === 'user-propositions-component'" ></user-propositions-component>
+        </md-card-content>        
+      </md-card>        
+  </md-grid-tile>
+</md-grid-list>

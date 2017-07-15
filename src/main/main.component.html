@@ -1,0 +1,45 @@
+<md-toolbar id="toolbar">
+        <span>
+            <button style="float:left" (click)="sidenav.toggle();toggleButton()" type="button" role="button" aria-label="Toggle Navigation" class="{{closeClass}}">
+                <span class="lines"></span>
+            </button>
+            <div class="logo" (click)="goToHomePage()">
+                La constituante<br>
+                <table>
+                    <tbody>
+                    <tr style="height:5px">
+                        <td style="background:blue;width: 60px;" title="liberté"></td>
+                        <td style="background:white;width: 60px;" title="égalité"></td>
+                        <td style="background:red;width: 60px;" title="fraternité"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </span>
+        <span class="example-spacer"></span>        
+
+        <button md-icon-button [mdMenuTriggerFor]="menu">
+            <i class="material-icons">settings</i>
+        </button>
+        <md-menu #menu="mdMenu">
+            <a md-menu-item *ngFor="let b of settings" [routerLink]="['/'+b.action]">
+                <i class="material-icons vertical-align-middle padding-bottom-3">{{b.icon}}</i>
+                <div style="display:inline-block">{{b.label}}</div> 
+            </a>        
+        </md-menu>
+</md-toolbar>
+
+<md-sidenav-container (onOpen)="sideNavOpened($event)"
+                (onClose)="sideNavClosed($event)">
+    <md-sidenav #sidenav mode="side" opened="false">
+        <titres-component></titres-component>
+    </md-sidenav>
+    <div  flex layout="row" class="my-content">
+        <!--<home-page-component *ngIf="display==='homepage'"></home-page-component>        
+        <dash-board-component *ngIf="display==='dashboard'"></dash-board-component>
+        <login-component *ngIf="display==='login'"></login-component>
+        <resume-vote *ngIf="display=== 'resume-votes'" [titres]="titres"></resume-vote>
+        <settings-component *ngIf="display=== 'settings-component'" [display]="settingPage"></settings-component>-->
+        <router-outlet></router-outlet>
+    </div>    
+  </md-sidenav-container>

@@ -1,0 +1,32 @@
+<div *ngIf="constitutions || titres">
+    <div *ngIf="!maindisplaying">
+        <h2 style="padding-left: 20px;padding-bottom:10px;">
+            Changer de Constitution
+        </h2>
+        <md-select placeholder="Choisir une constitution" [(ngModel)]="selectedValue" name="constitution" (change)="changeConstitution($event)">                    
+            <md-option *ngFor="let constitution of constitutions; let i = index" [value]="constitution.constitution_id">
+                {{constitution.short_name}}
+            </md-option>
+        </md-select>
+    </div>
+    <md-list *ngIf="titres && titres.length">
+        <!--<div *ngFor="let titre of titres">
+            <titre-component [titre]="titre"
+                             [maindisplaying]="maindisplaying"
+                             [constitution_url]="constitution_url"
+            ></titre-component>
+        </div>-->
+        <p-accordion>
+            <p-accordionTab *ngFor="let titre of titres" header="{{getTitreDisplayName(titre)}} " mdTooltip="{{titre.toolTip}}">
+                <articles-compnent [articles]="titre.articles" 
+                                [maindisplaying]="maindisplaying"
+                                [constitution_url]="constitution_url"
+                            (onArticleSelected)="onArticleSelected($event)">
+                </articles-compnent>
+            </p-accordionTab>
+        </p-accordion>          
+    </md-list>
+    <div *ngIf="selectedValue !== applicableConstitutionId" style="margin-top:20px;margin-left: 20px">
+        <button md-raised-button (click)="addArticle()">Ajouter un article à cette constitution</button>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div id="resumeVoteDiv" style="padding-bottom: 50px;">
+    <div *ngIf="display === 'votes'">
+        <ensemble-component [titres]="titres"></ensemble-component>
+    </div>
+    <div *ngIf="display === 'loading'">
+        <md-progress-bar mode="indeterminate"></md-progress-bar>
+    </div>
+    <div style="text-align:center">
+        <button md-raised-button style="margin-top:30px;" (click)="continueVotes()">Poursuivre mes votes</button>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="dosis">
+  <h1>Vous souhaitez nous contacter?</h1>
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" style="padding:20px;padding-bottom: 80px">
+    <md-input-container class="full-width">
+        <input mdInput placeholder="adresse email" formControlName="email" name="email" required>
+    </md-input-container>
+    <md-input-container class="full-width">
+        <input mdInput placeholder="Sujet" type="text" formControlName="subject" name="subject" required>
+    </md-input-container>
+    <md-input-container class="full-width">
+      <textarea maxlength="700" type="text" formControlName="message" name="message" required mdInput placeholder="Rédigez ici votre message"></textarea>                
+    </md-input-container>
+    <p>
+        <img src="/captcha" />
+    </p>
+    <md-input-container class="full-width">
+        <input mdInput placeholder="Recopier ici le texte ci-dessus s'il vous plait" type="text" formControlName="captcha" name="captcha" required>
+    </md-input-container>
+    <button md-raised-button type="submit" class="btn btn-success" [disabled]="!contactForm.valid">Valider</button>
+</form>
+</div>

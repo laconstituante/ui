@@ -1,0 +1,73 @@
+<form [formGroup]="createUserForm" (ngSubmit)="onSubmit()" style="padding:20px;padding-bottom: 80px">
+    <md-input-container class="full-width">
+        <input mdInput placeholder="adresse email" type="email" formControlName="email" name="email" required>
+    </md-input-container>
+     
+    <table class="full-width" cellspacing="0"><tr>
+        <td class="ui-g-4">
+            <md-select placeholder="Séléctionner votre civilité" formControlName="civilite" name="civilite" required>
+                <md-option *ngFor="let gender of Genders" [value]="gender.value">
+                {{gender.viewValue}}
+                </md-option>
+            </md-select>
+        </td>
+        <td  class="ui-g-4">
+            <md-input-container class="full-width">
+                <input mdInput placeholder="Prénom" type="text" formControlName="firstname">
+            </md-input-container>
+        </td>
+        <td class="ui-g-4">
+            <md-input-container class="full-width">
+                <input mdInput placeholder="Nom de famille" type="text" formControlName="lastname">
+            </md-input-container>
+        </td>
+    </tr></table>
+    <table class="full-width" cellspacing="0"><tr>
+        <td><md-input-container class="full-width">
+        <input mdInput placeholder="Choisir un mot de passe" type="password" formControlName="password">
+        </md-input-container></td>
+        <td><md-input-container class="full-width">
+        <input mdInput placeholder="Confirmer votre mot de passe" type="password" formControlName="confirmpassword">
+        </md-input-container></td>
+    </tr></table>
+    <p>
+        <md-input-container class="full-width">
+        <input mdInput placeholder="Date de naissance" type="date" formControlName="dateofbirth">
+        </md-input-container>                 
+    </p>
+    <table class="full-width" cellspacing="0"><tr>
+        <td>
+            <p>
+                Etes vous de nationalité française?
+            </p>
+            <p>
+                <md-radio-group class="lacons-radio-group" formControlName="isfrench">
+                    <md-radio-button class="lacons-radio-button" value="true">Oui</md-radio-button>
+                    <md-radio-button class="lacons-radio-button" value="false">Non</md-radio-button>
+                </md-radio-group>
+            </p>
+        </td>
+        <td>
+            <p>
+                Habitez-vous en France ?
+            </p>
+            <p>
+                <md-radio-group class="lacons-radio-group" formControlName="isfrance">
+                    <md-radio-button class="lacons-radio-button" value="true">Oui</md-radio-button>
+                    <md-radio-button class="lacons-radio-button" value="false">Non</md-radio-button>
+                </md-radio-group>
+            </p>
+        </td>
+    </tr></table>
+    <!--<p>
+        <md-checkbox  [(ngModel)]="!user.isfrench" name="isfrench" >Non.</md-checkbox>
+    </p>-->
+    <md-input-container class="full-width" *ngIf="isFrance">
+        <input mdInput mdInputmaxlength="5" placeholder="Code postal" type="number" formControlName="codePostal">        
+    </md-input-container>
+    <md-input-container class="full-width" *ngIf="!isFrance">
+        <input mdInput mdInputmaxlength="5" placeholder="Pays de résidence" type="text" formControlName="country">        
+    </md-input-container>
+    <button md-raised-button class="btn btn-success" type="submit" [disabled]="!createUserForm.valid">Valider</button>
+    <p-messages [value]="msgs" [closable]="false"></p-messages>
+</form>

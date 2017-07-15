@@ -1,0 +1,29 @@
+<form *ngIf="display === 'form'" (ngSubmit)="onSubmit()" #confirmUserForm="ngForm" style="padding:20px">
+        <h2>Parfait!</h2>
+        <label style="font-size: 1.2em;font-family: 'Dosis',serif">
+            Nous venons de vous envoyer un courriel éléctronique contenant un code afin de confirmer votre adresse email.<br>
+            Si vous ne le trouvez pas, c'est qu'il a malencontreusement atterri dans votre courrier indésirable.<br>
+            Veuillez s'il vous plait copier coller le code que vous avez reçu ci dessous:
+        </label>
+        <br>
+        <md-input-container class="full-width">
+            <input mdInput placeholder="Code de confirmation" type="text" [(ngModel)]="code"  [ngModelOptions]="{standalone: true}" required>
+        </md-input-container>
+        <button md-raised-button type="submit" class="btn btn-success" [disabled]="!confirmUserForm.form.valid">Valider</button>
+        <label *ngIf='warning'>
+            {{warning}}
+        </label>
+</form>
+<!--<md-spinner *ngIf="display === 'loading'" >
+    Veuillez patienter s'il vous plait...
+</md-spinner>-->
+<div class="claim-text-smaller" *ngIf="display === 'error'" >    
+    {{error}}
+    <button md-raised-button class="btn btn-success" (click)="goToForm()">Ok</button>
+</div>
+<div class="claim-text-smaller" *ngIf="display === 'success'">
+    Bienvenu(e) en démocratie du 21e siècle.<br>
+    <button  type="submit" (click)="goToLoggedInSection()" class="claim-text-smaller btn btn-success">
+         Cliquez ici pour continuer.
+    </button>
+</div>

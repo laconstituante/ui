@@ -1,0 +1,16 @@
+<form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <md-input-container class="full-width">
+        <input mdInput placeholder="adresse email" type="email" [(ngModel)]="userLogin.email" name="email" required>
+    </md-input-container>
+    <md-input-container class="full-width">
+        <input mdInput placeholder="Mot de passe" type="password" [(ngModel)]="userLogin.password" name="password" required>
+    </md-input-container>
+
+    <p>
+        <md-checkbox [(ngModel)]="userLogin.is_persistent" name="rememberMe">Garder ma session ouverte</md-checkbox>
+    </p>
+    <button md-raised-button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">Valider</button>
+    <label *ngIf='warning'>
+            {{warning}}
+    </label>
+</form>

@@ -1,0 +1,23 @@
+<div *ngIf="constitution">
+    <div id="constitution-description" class="home-page-header">
+        {{constitution.constitution_name}}    
+    </div>
+
+    <md-grid-list cols="1" rowHeight="800" >
+    <md-grid-tile >
+        <md-card class="home-page-card">       
+            <md-card-content class="home-page-card-content">            
+                <div class="dosis" style="padding:50px;">
+                    <h2>Description de la {{constitution.constitution_name}}</h2>
+                    <p>
+                        Description: {{constitution.description}}
+                    </p>
+                    <a md-raised-button [routerLink]="['/titres',constitution.constitution_url]" >
+                        Voir tous les titres de cette constitution.
+                    </a>
+                </div>
+            </md-card-content>        
+        </md-card>
+    </md-grid-tile>
+    </md-grid-list>
+</div>

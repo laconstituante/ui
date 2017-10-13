@@ -11,6 +11,7 @@ Pour des raisons de securite, seuls les developpeurs interesses par l'api auront
 Initialisation de l'application
 Pour installer l'application en local suivez les etapes suivantes :
 Installer le repertoire puis:
+
  1- npm install -g @angular/cli
  
 aller sur le repertoire installe 

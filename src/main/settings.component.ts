@@ -1,5 +1,5 @@
 import {Component,Input} from '@angular/core';
-// import { WindowService } from "../services/window.service";
+import { WindowService } from "../services/window.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RestService } from "../services/rest.service";
 import { Title }     from '@angular/platform-browser';

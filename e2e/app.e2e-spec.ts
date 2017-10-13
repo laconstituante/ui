@@ -1,14 +1,14 @@
-import { CliUniversalDemoPage } from './app.po';
+import { LaconstituantePage } from './app.po';
 
-describe('cli-universal-demo App', () => {
-  let page: CliUniversalDemoPage;
+describe('laconstituante App', () => {
+  let page: LaconstituantePage;
 
   beforeEach(() => {
-    page = new CliUniversalDemoPage();
+    page = new LaconstituantePage();
   });
 
-  it('should display message saying home-page works!', () => {
+  it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual(<any>'home-page works!');
+    expect(page.getParagraphText()).toEqual('app works!');
   });
 });

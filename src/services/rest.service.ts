@@ -18,10 +18,11 @@ import { Eligibility } from '../dto/eligibility';
 import { TitreStat } from "../dto/titre.stat";
 import { Contact } from "../dto/contact";
 import { Subject } from "rxjs/Subject";
+import { environment } from "../environments/environment";
+
 
 @Injectable()
-export class RestService {
-    private baseUrl = 'https://www.laconstituante.com/api';
+export class RestService {    
     private headers = new Headers({'Content-Type': 'application/json'});
     private isAuthenticated:boolean = false;
     private authObj:AuthObject = null;
@@ -76,7 +77,7 @@ export class RestService {
     getConstitutions():Observable<Constitution[]>{
       let headers = new Headers({ 'Content-Type': 'application/json'});
       let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.baseUrl + '/getConstitutions',options)
+        return this.http.get(environment.server + '/getConstitutions',options)
                     .map(this.extractData)
                     .catch(this.handleError);
     }
@@ -84,7 +85,7 @@ export class RestService {
       let headers = new Headers({ 'Content-Type': 'application/json'});
         let options = new RequestOptions({ headers: headers });
         let endpoint = isUrl ? '/getTitresFromConstitutionByUrl/' : '/getTitresFromConstitution/'
-        return this.http.get(this.baseUrl + endpoint + constitution_id,options)
+        return this.http.get(environment.server + endpoint + constitution_id,options)
                     .map(this.extractData)
                     .catch(this.handleError);
     }
@@ -92,14 +93,14 @@ export class RestService {
     getConstitution(constitution_id):Observable<Titre[]>{
       let headers = new Headers({ 'Content-Type': 'application/json'});
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.baseUrl + '/getConstitution/'+constitution_id,options)
+        return this.http.get(environment.server + '/getConstitution/'+constitution_id,options)
                     .map(this.extractData)
                     .catch(this.handleError);
     }
     getArticlesFromTitre(titre_id):Observable<Article[]>{
       let headers = new Headers({ 'Content-Type': 'application/json'});
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.baseUrl + '/getArticlesByTitre/' + titre_id,options)
+        return this.http.get(environment.server + '/getArticlesByTitre/' + titre_id,options)
                     .map(this.extractData)
                     .catch(this.handleError);
     }
@@ -108,22 +109,22 @@ export class RestService {
         if(this.isAuthenticated){
           let headers = new Headers({ 'Content-Type': 'application/json','AuthenticationKey':this.authObj.api_token });
           let options = new RequestOptions({ headers: headers });
-          return this.http.get(this.baseUrl + '/getAllAlineasByArticleIdAuth/' + article_id, { headers:headers })
+          return this.http.get(environment.server + '/getAllAlineasByArticleIdAuth/' + article_id, { headers:headers })
                       .map(this.extractData)
                       .catch(this.handleError);
         }else{
-          return this.http.get(this.baseUrl + '/getAllAlineasByArticleId/' + article_id)
+          return this.http.get(environment.server + '/getAllAlineasByArticleId/' + article_id)
                       .map(this.extractData)
                       .catch(this.handleError);
         }
     }
     getAlineasByArticleUrl(article_url:string,constitution_url:string):Observable<ApiResponse<Alinea[]>>{
-      return this.http.get(this.baseUrl + '/getAllAlineasByArticleUrl/' + article_url + '/' + constitution_url)
+      return this.http.get(environment.server + '/getAllAlineasByArticleUrl/' + article_url + '/' + constitution_url)
                       .map(this.extractData)
                       .catch(this.handleError);
     }
     getShortUrlForArticle(article_url:string,constitution_url:string):Observable<ApiResponse<string>>{
-      return this.http.get(this.baseUrl + '/getShortUrlForArticle/' + article_url + '/' + constitution_url)
+      return this.http.get(environment.server + '/getShortUrlForArticle/' + article_url + '/' + constitution_url)
                       .map(this.extractData)
                       .catch(this.handleError);
     }
@@ -131,16 +132,16 @@ export class RestService {
       if(this.isLoggedIn()){
         return this.getPropositionsFromAlineaAuth(alinea_id);
       }else 
-        return this.http.get(this.baseUrl + '/getPropositionsFromAlinea/' + alinea_id)
+        return this.http.get(environment.server + '/getPropositionsFromAlinea/' + alinea_id)
                     .map(this.extractData)
                     .catch(this.handleError);
     }
     getPropositionsFromAlineaAuth(alinea_id):Observable<ApiResponse<Proposition[]>>{
-      if(this.authObj.api_token){
+      if(this.authObj && this.authObj.api_token){
         let headers = new Headers({ 'Content-Type': 'application/json'});
         this.addAuthencationToHeaders(headers);
         let options = new RequestOptions({ headers: headers }); 
-        return this.http.get(this.baseUrl + '/getPropositionsFromAlineaAuth/' + alinea_id, { headers:headers })
+        return this.http.get(environment.server + '/getPropositionsFromAlineaAuth/' + alinea_id, { headers:headers })
                     .map(this.extractData)
                     .catch(this.handleError);
       }else{
@@ -148,10 +149,10 @@ export class RestService {
       }
     }
     getUserStat():Observable<ApiResponse<UserStat[]>>{
-      if(this.authObj.api_token){
+      if(this.authObj && this.authObj.api_token){
         let headers = new Headers({ 'Content-Type': 'application/json','AuthenticationKey':this.authObj.api_token });
         let options = new RequestOptions({ headers: headers }); 
-          return this.http.get(this.baseUrl+'/getUserStat', { headers:headers })
+          return this.http.get(environment.server+'/getUserStat', { headers:headers })
                       .map(this.extractData)
                       .catch(this.handleError);
       }else{
@@ -162,7 +163,7 @@ export class RestService {
       if(this.authObj.api_token){
         let headers = new Headers({ 'Content-Type': 'application/json','AuthenticationKey':this.authObj.api_token });
         let options = new RequestOptions({ headers: headers }); 
-          return this.http.get(this.baseUrl+'/getUserStatTitres', { headers:headers })
+          return this.http.get(environment.server+'/getUserStatTitres', { headers:headers })
                       .map(this.extractData)
                       .catch(this.handleError);
       }else{
@@ -173,7 +174,7 @@ export class RestService {
       if(this.authObj.api_token){
         let headers = new Headers({ 'Content-Type': 'application/json'});
         let options = new RequestOptions({ headers: headers }); 
-          return this.http.get(this.baseUrl+'/getGlobalStat', { headers:headers })
+          return this.http.get(environment.server+'/getGlobalStat', { headers:headers })
                       .map(this.extractData)
                       .catch(this.handleError);
       }else{
@@ -185,7 +186,7 @@ export class RestService {
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'});
         this.addAuthencationToHeaders(headers);
         let options = new RequestOptions({ headers: headers }); 
-          return this.http.post(this.baseUrl+'/createProposition', this.getEncodedObj(proposition), options)
+          return this.http.post(environment.server+'/createProposition', this.getEncodedObj(proposition), options)
                       .map(this.extractData)
                       .catch(this.handleError);
       }else{
@@ -196,14 +197,14 @@ export class RestService {
     createAccount(user:UserProfile):Observable<ApiResponse<UserProfile>>{
       let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
       let options = new RequestOptions({headers: headers}); 
-        return this.http.post(this.baseUrl+'/createUser', this.getEncodedObj(user), options)
+        return this.http.post(environment.server+'/createUser', this.getEncodedObj(user), options)
                     .map(this.extractData)
                     .catch(this.handleError);
     }
     loginUser(user:LoginObject):Observable<ApiResponse<AuthObject>>{
       let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
       let options = new RequestOptions({ headers: headers }); 
-        return this.http.post(this.baseUrl+'/loginUser', this.getEncodedObj(user), options)
+        return this.http.post(environment.server+'/loginUser', this.getEncodedObj(user), options)
                     .map(this.extractData)
                     .catch(this.handleError);
     }
@@ -211,7 +212,7 @@ export class RestService {
       let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
       this.addAuthencationToHeaders(headers);
       let options = new RequestOptions({ headers: headers }); 
-        return this.http.post(this.baseUrl+'/voteAlinea', this.getEncodedObj(alinea), options)
+        return this.http.post(environment.server+'/voteAlinea', this.getEncodedObj(alinea), options)
                     .map(this.extractData)
                     .catch(this.handleError);
     }
@@ -219,7 +220,7 @@ export class RestService {
       let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
       this.addAuthencationToHeaders(headers);
       let options = new RequestOptions({ headers: headers }); 
-        return this.http.post(this.baseUrl+'/voteProposition', this.getEncodedObj(proposition), options)
+        return this.http.post(environment.server+'/voteProposition', this.getEncodedObj(proposition), options)
                     .map(this.extractData)
                     .catch(this.handleError);
     }
@@ -254,7 +255,7 @@ export class RestService {
     confirmEmail(confirmationDetails:any):Observable<any>{
       let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
       let options = new RequestOptions({ headers: headers }); 
-        return this.http.post(this.baseUrl+'/confirmEmail', this.getEncodedObj(confirmationDetails), options)
+        return this.http.post(environment.server+'/confirmEmail', this.getEncodedObj(confirmationDetails), options)
                     .map(this.extractData)
                     .catch(this.handleError);
     }
@@ -263,7 +264,7 @@ export class RestService {
         let headers = new Headers({ 'Content-Type': 'application/json'});
         this.addAuthencationToHeaders(headers);
         let options = new RequestOptions({ headers: headers }); 
-          return this.http.get(this.baseUrl+'/get6RepublicEligibility', { headers:headers })
+          return this.http.get(environment.server+'/get6RepublicEligibility', { headers:headers })
                       .map(this.extractData)
                       .catch(this.handleError);
       }else{
@@ -275,7 +276,7 @@ export class RestService {
         let headers = new Headers({ 'Content-Type': 'application/json'});
         this.addAuthencationToHeaders(headers);
         let options = new RequestOptions({ headers: headers }); 
-          return this.http.get(this.baseUrl+'/getNextAlineas', { headers:headers })
+          return this.http.get(environment.server+'/getNextAlineas', { headers:headers })
                       .map(this.extractData)
                       .catch(this.handleError);
       }else{
@@ -286,14 +287,14 @@ export class RestService {
       let headers = new Headers({ 'Content-Type': 'application/json'});
       this.addAuthencationToHeaders(headers);
       let options = new RequestOptions({ headers: headers }); 
-        return this.http.get(this.baseUrl+'/mlogout', { headers:headers })
+        return this.http.get(environment.server+'/mlogout', { headers:headers })
                     .map(this.extractData)
                     .catch(this.handleError);
     }
    contactUs(contact:Contact):Observable<ApiResponse<any>>{
         let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'});
         let options = new RequestOptions({ headers: headers }); 
-          return this.http.post(this.baseUrl+'/contactUs',this.getEncodedObj(contact), options)
+          return this.http.post(environment.server+'/contactUs',this.getEncodedObj(contact), options)
                       .map(this.extractData)
                       .catch(this.handleError);
       

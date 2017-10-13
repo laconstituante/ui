@@ -10,12 +10,6 @@
         </md-select>
     </div>
     <md-list *ngIf="titres && titres.length">
-        <!--<div *ngFor="let titre of titres">
-            <titre-component [titre]="titre"
-                             [maindisplaying]="maindisplaying"
-                             [constitution_url]="constitution_url"
-            ></titre-component>
-        </div>-->
         <p-accordion>
             <p-accordionTab *ngFor="let titre of titres" header="{{getTitreDisplayName(titre)}} " mdTooltip="{{titre.toolTip}}">
                 <articles-compnent [articles]="titre.articles" 

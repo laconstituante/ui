@@ -10,6 +10,7 @@ export class PropositionsComponent implements OnInit{
      propositions:Proposition[];     
     ngOnInit(){
       if(this.rest && this.rest.parent_alinea_id){
+          if(this.rest.isLoggedIn()){
         this.rest.getPropositionsFromAlineaAuth(this.rest.parent_alinea_id).subscribe(
             success =>{
                 if(success && success.entity){
@@ -20,6 +21,19 @@ export class PropositionsComponent implements OnInit{
 
             }
         );
+          }else{
+            this.rest.getPropositionsFromAlinea(this.rest.parent_alinea_id).subscribe(
+                success =>{
+                    if(success && success.entity){
+                        this.propositions = success.entity;
+                    }
+                },
+                error =>{
+
+                }
+            ); 
+          }
+        
       }
     }
     constructor (private rest:RestService,

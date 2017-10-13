@@ -10,8 +10,6 @@ export class DashBoardComponent implements OnInit{
 
     ngOnInit(){        
     }
-    constructor(private rest:RestService){
-
-    }
+    constructor(){}
 
 }

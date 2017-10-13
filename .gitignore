@@ -4,7 +4,6 @@
 /dist
 /tmp
 /out-tsc
-yarn*
 
 # dependencies
 /node_modules
@@ -24,12 +23,11 @@ yarn*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history
 
 # misc
 /.sass-cache
 /connect.lock
-/coverage
+/coverage/*
 /libpeerconnection.log
 npm-debug.log
 testem.log

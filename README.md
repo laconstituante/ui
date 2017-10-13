@@ -24,6 +24,14 @@ aller sur le repertoire installe
  Vous n'avez qu'a naviger vers http://localhost:XXXX/
  ou XXXX est le port indique par le compilateur
   
+--
+
+Vous pouvez egalement lancer une instance copy exacte de production en local en lancant la commande suivante :
+
+node static/server.js
+
+Cela lancera un serveur NodeJs sur le port 4000 et utilisera l'url de l'api de production. 
+--
 
 Si vous souhaitez nous aider a developper de nouvelles fonctionnalite, rejoignez le projet de La constituante sur Taiga.
 https://tree.taiga.io/project/laconstituante-la-constituante/kanban

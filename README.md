@@ -8,8 +8,7 @@ Dans ce document que vous trouverez quelques indications sur la structure du pro
 La constituante est construite a l'aide du framework Angular4 pour sa partie client, et php pour sa partie serveur.
 Pour des raisons de securite, seuls les developpeurs interesses par l'api auront access au code sur demande.
 
---Initialisation de l'application
-
+Initialisation de l'application
 Pour installer l'application en local suivez les etapes suivantes :
 Installer le repertoire puis :
  1- npm install -g @angular/cli
@@ -18,20 +17,20 @@ aller sur le repertoire installe
  3- modifier l'url du serveur pour pointer soit en local soit vers le serveur de developpement
  (src\environments\environment.ts)
  4- npm run start 
---
+
  la commande npm run start executera la commance ng serve qui s'appuie sur angular cli.
  Un serveur NodeJs est demarre sur un port qui vous sera indique sur la ligne de commande
  Vous n'avez qu'a naviger vers http://localhost:XXXX/
  ou XXXX est le port indique par le compilateur
   
---
+
 
 Vous pouvez egalement lancer une instance copy exacte de production en local en lancant la commande suivante :
 
 node static/server.js
 
 Cela lancera un serveur NodeJs sur le port 4000 et utilisera l'url de l'api de production. 
---
+
 
 Si vous souhaitez nous aider a developper de nouvelles fonctionnalite, rejoignez le projet de La constituante sur Taiga.
 https://tree.taiga.io/project/laconstituante-la-constituante/kanban

@@ -1,6 +1,7 @@
 {
-  "name": "laconstituante",
-  "version": "0.0.0",
+  "name": "La constituante",
+  "version": "1.1.0",
+  "author":"Mehdi Tanouti"
   "license": "MIT",
   "scripts": {
     "ng": "ng",

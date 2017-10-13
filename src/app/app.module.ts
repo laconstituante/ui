@@ -1,44 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-// import 'hammerjs';
-// import {Ng2PageScrollModule} from 'ng2-page-scroll';
-import {MessagesModule} from 'primeng/components/messages/messages';
-import {ChartModule} from 'primeng/components/chart/chart';
-import {AccordionModule} from 'primeng/components/accordion/accordion';
-import { routes } from "./app.router";
-import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
-export { AppComponent };
-//Custom Component/Service/Directives
-import { ShareService } from "../services/share.service";
-import { SharableDirective } from "../directives/sharable.directive";
-import { ConstitutionComponent } from "../main/constitution.component";
-import { ConstitutionsComponent } from "../main/constitutions.component";
-import { AlineaComponent } from "../main/alinea.component";
-import { AlineasComponent } from "../main/alineas.component";
-import { TitresMainComponent } from "../main/titres.main.component";
-import { UserStatComponent } from './user-stat/user-stat.component';
-import { GeneralStatComponent } from './general-stat/general-stat.component';
-import { ResumeVotesComponent } from "../main/resume.vote.component";
-import { ViewProfile } from "../forms/view.profile";
-import { SettingsComponent } from "../main/settings.component";
-import { HelpComponent } from "../forms/help.component";
-import { UserPropositionsComponent } from "../forms/user.propositions.component";
-import { ContactComponent } from "../forms/contact.component";
-import { SupportComponent } from "../forms/support.component";
-import { SimpleConfirm } from "../forms/simple.confirm";
-//Services
-import { RestService } from '../services/rest.service';
-import { ArticleSubject } from '../services/article.subject';
-import { WindowService } from '../services/window.service';
-import { PageManagerService } from '../services/page.manager.service';
-import {NewArticleHandler} from '../services/new.article.handler';
+
+// import { RouterModule, Routes } from '@angular/router';
+import 'hammerjs';
+import { AppComponent } from './app.component';
 import { MainComponent } from '../main/main.component';
 import { ArticlesComponent } from '../main/articles.component';
 import { SingleAlineaComponent } from '../main/single.alinea.component';
@@ -55,6 +25,49 @@ import {EnsembleComponent} from '../main/ensemble.component';
 import {InsufficiantPrivilegesComponent} from '../forms/insufficiant.privileges.component';
 import { PropositionsComponent } from "../forms/propositions.component";
 import { PropositionComponent } from "../forms/proposition.component";
+//dtos
+import {Titre} from '../dto/titre';
+import {Article} from '../dto/article';
+import {Alinea} from '../dto/alinea';
+import {Proposition} from '../dto/proposition';
+//Services
+import { RestService } from '../services/rest.service';
+import { ArticleSubject } from '../services/article.subject';
+import { WindowService } from '../services/window.service';
+import { PageManagerService } from '../services/page.manager.service';
+import {NewArticleHandler} from '../services/new.article.handler';
+//external libs
+// import { RecaptchaNoFormsModule } from 'ng2-recaptcha/ng2-recaptcha.noforms';
+// import {RecaptchaLoaderService} from 'ng2-recaptcha';
+import {Ng2PageScrollModule} from 'ng2-page-scroll';
+import {MessagesModule} from 'primeng/components/messages/messages';
+import {ChartModule} from 'primeng/components/chart/chart';
+import {AccordionModule} from 'primeng/components/accordion/accordion';
+import { UserStatComponent } from './user-stat/user-stat.component';
+import { GeneralStatComponent } from './general-stat/general-stat.component';
+import { ResumeVotesComponent } from "../main/resume.vote.component";
+import { ViewProfile } from "../forms/view.profile";
+import { SettingsComponent } from "../main/settings.component";
+import { HelpComponent } from "../forms/help.component";
+import { UserPropositionsComponent } from "../forms/user.propositions.component";
+import { ContactComponent } from "../forms/contact.component";
+import { SupportComponent } from "../forms/support.component";
+import { SimpleConfirm } from "../forms/simple.confirm";
+import { routes } from "./app.router";
+import { provideRoutes, RouterModule } from '@angular/router';
+import { ConstitutionComponent } from "../main/constitution.component";
+import { ConstitutionsComponent } from "../main/constitutions.component";
+import { AlineaComponent } from "../main/alinea.component";
+import { AlineasComponent } from "../main/alineas.component";
+import { TitresMainComponent } from "../main/titres.main.component";
+
+// import {MenubarModule} from 'primeng/components/menubar/menubar';
+// import { CeiboShare } from 'ng2-social-share';
+// import {ShareButtonsModule} from "ng2-sharebuttons";
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome'
+import { ShareService } from "../services/share.service";
+import { SharableDirective } from "../directives/sharable.directive";
+
 
 @NgModule({
   declarations: [
@@ -91,16 +104,17 @@ import { PropositionComponent } from "../forms/proposition.component";
     AlineasComponent,
     AlineaComponent,
     TitresMainComponent,
+    // ShareButtonsModule
     SharableDirective 
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'laconstituante' }),
+    BrowserModule,//.withServerTransition({appId: 'laconstituante'}),
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    BrowserAnimationsModule,
     MaterialModule,
-    NoopAnimationsModule,
-    // Ng2PageScrollModule.forRoot(),
+    Ng2PageScrollModule.forRoot(),
     MessagesModule,
     ChartModule,
     AccordionModule,
@@ -108,14 +122,14 @@ import { PropositionComponent } from "../forms/proposition.component";
     RouterModule,
     Angular2FontawesomeModule
   ],
-  exports: [AppComponent],
   providers: [
     RestService,
     ArticleSubject,
     WindowService,
     PageManagerService,
     NewArticleHandler,
-    ShareService],
+    ShareService
+    ],
   entryComponents: [ ConfirmEmail,VoteSnack,InsufficiantPrivilegesComponent,PropositionsComponent,SimpleConfirm ],
   bootstrap: [AppComponent]
 })

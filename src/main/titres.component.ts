@@ -50,7 +50,7 @@ export class TitresComponent implements  OnInit{
                 },
                 error =>{}
             );
-        }
+        }else{
         this.rest.getConstitutions().subscribe(
             constitutions => {                
                 this.constitutions = constitutions;
@@ -66,6 +66,7 @@ export class TitresComponent implements  OnInit{
                 console.log(error);
             }
         );
+        }            
     }
     setTitres(titres){
         if(titres && titres.length){

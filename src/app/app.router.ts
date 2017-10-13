@@ -22,7 +22,7 @@ import { TitresMainComponent } from "../main/titres.main.component";
 import { DashBoardComponent } from "../main/dash.board.component";
 
 export const router:Routes = [
-    {path : '' , redirectTo:'accueil', pathMatch:'full' },
+    {path: '', component: HomePage, pathMatch: 'full' },
     {path : 'accueil' , component: HomePage},
     {path:'constitutions', component : ConstitutionsComponent},
     {path:'constitution/:id', component : ConstitutionComponent},

@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import { RestService } from '../services/rest.service';
-// import { PageScrollService } from "ng2-page-scroll/src/ng2-page-scroll.service";
-// import { PageScrollInstance } from "ng2-page-scroll/src/ng2-page-scroll-instance";
+import { PageScrollService } from "ng2-page-scroll/src/ng2-page-scroll.service";
+import { PageScrollInstance } from "ng2-page-scroll/src/ng2-page-scroll-instance";
 import { WindowService} from '../services/window.service';
 import { Titre } from "../dto/titre";
 @Component({
@@ -13,11 +13,8 @@ export class ResumeVotesComponent {
   display:string;
   document;
   // @ViewChild('resumeVoteDiv') private myScrollContainer: ElementRef;
-  constructor(private rest:RestService
-  // ,private pageScrollService: PageScrollService
-  // , private windowRef:WindowService
-  ){
-    // this.document = windowRef.nativeWindow.document;
+  constructor(private rest:RestService,private pageScrollService: PageScrollService, private windowRef:WindowService){
+    this.document = windowRef.nativeWindow.document;
   }
   ngOnInit(){
     if(this.rest && this.rest.isLoggedIn()  && !this.titres){
@@ -50,8 +47,8 @@ export class ResumeVotesComponent {
   scrollToTop(){
         try {
             //this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-            // let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#resumeVoteDiv');
-            // this.pageScrollService.start(pageScrollInstance);
+            let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#resumeVoteDiv');
+            this.pageScrollService.start(pageScrollInstance);
         } catch(err) {
           console.log(err);
          }                 

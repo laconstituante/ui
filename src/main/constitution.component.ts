@@ -3,7 +3,7 @@ import {RestService} from '../services/rest.service';
 import {PieData} from '../dto/PieData';
 import { Router } from "@angular/router";
 import { Constitution } from "../dto/constitution";
-// import { WindowService } from "../services/window.service";
+import { WindowService } from "../services/window.service";
 @Component({
   selector: 'constitution-component',
   templateUrl: './constitution.component.html'

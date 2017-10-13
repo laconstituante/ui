@@ -1,5 +1,5 @@
 import {Component,Input,OnInit} from '@angular/core';
-// import { WindowService} from '../services/window.service';
+import { WindowService} from '../services/window.service';
 import {UserProfile} from '../dto/user';
 import { RestService } from "../services/rest.service";
 import { Router } from "@angular/router";
@@ -27,7 +27,7 @@ export class HomePage implements OnInit{
        if(this.rest.isLoggedIn()){
           this._router.navigateByUrl('tableau-de-bord');
         }else{
-          this._router.navigateByUrl('accueil');
+          // this._router.navigateByUrl('accueil');
         }    
     }
     gotToSection(section){

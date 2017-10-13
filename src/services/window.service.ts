@@ -1,12 +1,7 @@
 import { Injectable } from '@angular/core';
 
 function getWindow (): any {
-    if(typeof(window) == 'object'){
-        return window;
-    }else{
-        return {};
-    }
-    
+    return window;
 }
 
 @Injectable()
